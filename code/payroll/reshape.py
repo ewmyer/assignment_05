@@ -56,9 +56,10 @@ def missed_weeks(grid: pd.DataFrame) -> pd.DataFrame:
     `melt` the grid back to long (the two name columns stay put; the week
     columns become `week_ending` / `hours_worked` pairs), then keep the zeros.
     """
-    weeks = [column for column in grid.columns if column not in ("employee_id", "display_name")]
+    id_columns = ["employee_id", "display_name"]
+    weeks = [column for column in grid.columns if column not in id_columns]
     missed = grid.melt(
-        id_vars=["employee_id", "display_name"],
+        id_vars=id_columns,
         value_vars=weeks,
         var_name="week_ending",
         value_name="hours_worked",
