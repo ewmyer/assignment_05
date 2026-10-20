@@ -1,5 +1,6 @@
 """
-payroll_report_app.py — the quarter at a glance, for someone who never opens a terminal.
+payroll_report_app.py — the quarter at a glance, for someone who never opens
+a terminal.
 
 Every Friday since September the office manager at Salt City Coffee has downloaded
 a payroll export from the Assignment 04 app; before that she typed the same file
@@ -39,7 +40,9 @@ uploads = st.file_uploader(
 
 if uploads:
     history = build_history([load_export(upload) for upload in uploads], employees)
-    unmatched = history.loc[history["department"].isna(), "employeeid"].dropna().unique()
+    unmatched = history.loc[
+        history["department"].isna(), "employeeid"
+    ].dropna().unique()
     if len(unmatched):
         st.warning(f"These employee IDs are not on the roster: {', '.join(unmatched)}")
 

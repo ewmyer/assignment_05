@@ -1,7 +1,28 @@
-Write your reflection here.
+Today I needed help turning the assignment's descriptions into working pandas
+code across the payroll pipeline and Streamlit app. In history.py, I needed
+guidance on vectorized .str methods for normalizing employee IDs and numbers,
+using errors="coerce" for unreadable values, and parsing US and ISO dates with
+explicit pd.to_datetime formats before using .dt to make date labels. I also
+needed help keeping lineage intact by adding cleaned columns to copies and
+stacking exports with concat and ignore_index=True.
 
-See reflection.md for what makes a good reflection — be specific, use the
-terminology from this assignment (grain, long vs. wide, vectorized .str methods,
-coerce, NaT, pd.to_datetime format, .dt, concat, ignore_index, group by, named
-aggregation, reset_index, pivot_table, fill_value, melt, lineage), and make it
-actionable.
+In summarize.py, I needed support formatting names, doing a left merge so that
+unmatched export rows were preserved, and building a group by with named
+aggregation and reset_index. I needed additional help understanding the change
+in grain from one row per employee per week to one row per employee, including
+how to count weeks over 40 hours. In reshape.py, I needed help using pivot_table
+with fill_value=0 to make an employee-by-week grid, then melt to find missed
+weeks. I also needed support wiring those pipeline steps into Streamlit widgets,
+filters, metrics, chart, dataframes, and a downloadable monthly-pay CSV. The
+focused tests helped catch issues at each stage, and a lint check reminded me
+to keep lines within the configured length.
+
+In the future, I can practice implementing these steps from a blank file before
+looking at a solution: write down the input and output shape, grain, and
+expected columns first, then test a small example by hand. I especially want
+more practice with named aggregation lambdas, ordering pivoted columns, and
+handling empty or unmatched data in Streamlit. I will run the relevant unit,
+pipeline, and structure tests after each step, then run the full suite and Ruff
+before considering the work complete. I should also review each failure to
+identify which pipeline step produced the unexpected value rather than treating
+the final symptom as the cause.
